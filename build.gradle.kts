@@ -30,20 +30,24 @@ toothpick {
 }
 
 subprojects {
+	apply(plugin = "java")
+	apply(plugin = "java-library")
+
     repositories {
         maven("https://nexus.velocitypowered.com/repository/velocity-artifacts-snapshots/")
         maven("https://oss.sonatype.org/content/repositories/snapshots/") {
             name = "sonatype-oss-snapshots"
         }
+        maven("https://codeberg.org/Kamillaova/maven-repo/media/branch/main/")
     }
 
     java {
-        sourceCompatibility = JavaVersion.toVersion(8)
-        targetCompatibility = JavaVersion.toVersion(8)
+        sourceCompatibility = JavaVersion.toVersion(17)
+        targetCompatibility = JavaVersion.toVersion(17)
     }
 
-    publishing.repositories.maven {
-        url = uri("https://repo.pl3x.net/snapshots")
-        credentials(PasswordCredentials::class)
+    dependencies {
+        testImplementation("junit:junit:4.13.1")
+        testImplementation("org.hamcrest:hamcrest-library:1.3")
     }
 }
